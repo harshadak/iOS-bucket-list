@@ -113,10 +113,11 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
     }
     
     func fetchAllItems() {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "BucketListItem")
+//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "BucketListItem")
+        let request:NSFetchRequest<BucketListItem> = BucketListItem.fetchRequest()
         do {
             let result = try managedObjectContext.fetch(request)
-            items = result as! [BucketListItem]
+            items = result 
         } catch {
             print("\(error)")
         }
@@ -140,9 +141,11 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
             
         } else {
             
-            let item = NSEntityDescription.insertNewObject(forEntityName: "BucketListItem", into: managedObjectContext) as! BucketListItem
+            // In the video, they do it like this
+//            let item = NSEntityDescription.insertNewObject(forEntityName: "BucketListItem", into: managedObjectContext) as! BucketListItem
+            let item = BucketListItem(context: managedObjectContext)
             item.text = text
-            items.append(item)
+//            items.append(item)
             
         }
         
@@ -152,10 +155,9 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
             print("\(error)")
         }
         
+        fetchAllItems()
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
-    
-
 }
 
