@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0I4-TZ-opF" id="52a-C8-EK6">
-                                    <rect key="frame" x="0.0" y="0.0" width="308" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="308" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -35,12 +35,12 @@
                     <navigationItem key="navigationItem" id="4wq-2W-2bX">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="31e-Oc-o8g">
                             <connections>
-                                <segue destination="q8V-5b-p7a" kind="presentation" identifier="AddItemSegue" id="Khc-X1-Pfo"/>
+                                <action selector="addButtonPressed:" destination="Fjs-pv-iNR" id="e2X-ef-zkc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="q8V-5b-p7a" kind="presentation" identifier="EditItemSegue" id="Jux-Ie-qH8"/>
+                        <segue destination="q8V-5b-p7a" kind="presentation" identifier="AddEditItemSegue" id="Jux-Ie-qH8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0h1-xP-Pus" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -145,7 +145,4 @@
             <point key="canvasLocation" x="1997.5999999999999" y="72.413793103448285"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="Jux-Ie-qH8"/>
-    </inferredMetricsTieBreakers>
 </document>

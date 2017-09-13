@@ -37,10 +37,16 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
         print("Selected")
     }
     
+    
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "AddEditItemSegue", sender: self)
+    }
+    
     // Edit functionality
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        performSegue(withIdentifier: "EditItemSegue", sender: indexPath)
+        performSegue(withIdentifier: "AddEditItemSegue", sender: indexPath)
     }
     
     // Delete functionality
@@ -50,17 +56,33 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
         tableView.reloadData()
     }
     
+    // Refactored the code below to be the one on line 77
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "AddItemSegue" {
+//            let navigationController = segue.destination as! UINavigationController
+//            let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
+//            addItemTableViewController.delegate = self
+//        } else if segue.identifier == "AddEditItemSegue" {
+//            let navigationController = segue.destination as! UINavigationController
+//            let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
+//            addItemTableViewController.delegate = self
+//            
+//            //            Don't understand this code'
+//            let indexPath = sender as! NSIndexPath
+//            let item = items[indexPath.row]
+//            
+//            addItemTableViewController.item = item
+//            addItemTableViewController.indexPath = indexPath
+//        }
+//    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddItemSegue" {
-            let navigationController = segue.destination as! UINavigationController
-            let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
-            addItemTableViewController.delegate = self
-        } else if segue.identifier == "EditItemSegue" {
-            let navigationController = segue.destination as! UINavigationController
-            let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
-            addItemTableViewController.delegate = self
-            
-//            Don't understand this code'
+        let navigationController = segue.destination as! UINavigationController
+        let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
+        addItemTableViewController.delegate = self
+        
+        if sender is NSIndexPath {
             let indexPath = sender as! NSIndexPath
             let item = items[indexPath.row]
             
