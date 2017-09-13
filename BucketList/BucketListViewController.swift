@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class BucketListViewController: UITableViewController, AddItemTableViewControllerDelegate {
     
     var items = ["Go to the moon", "Eat a candy bar", "Swim in the Amazon", "Ride a bike in Tokyo"]
+    
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +26,13 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
         // Dispose of any resources that can be recreated.
     }
     
+    // This function provides us with the number of rows that the app needs
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
+    
+    // This function creates each cell for the rows that get created in the function above
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListItemCell", for: indexPath)
@@ -33,23 +40,25 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
         return cell
     }
     
+    // This function provides us with the information when a row gets selected
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected")
     }
     
-    
+    // Add button functionality
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "AddEditItemSegue", sender: self)
     }
     
-    // Edit functionality
+    // Edit button functionality
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         performSegue(withIdentifier: "AddEditItemSegue", sender: indexPath)
     }
     
-    // Delete functionality
+    // Delete swipe functionality
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         items.remove(at: indexPath.row)
@@ -77,6 +86,8 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
 //        }
 //    }
     
+    // This function prepares for segues that you have in your app
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let navigationController = segue.destination as! UINavigationController
         let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
@@ -91,10 +102,14 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
         }
     }
     
+    // Cancel button functionality( Assigns the task to a delegate to dismiss this view
+    
     func cancelButtonPressed(by controller: AddItemTableViewController) {
         print("I'm the hidden controller, BUT I am responding to the cancel button press on the top view controller.")
         dismiss(animated: true, completion: nil)
     }
+    
+    // This function saves the items you create and appends to the table
     
     func itemSaved(by controller: AddItemTableViewController, with text: String, at indexPath: NSIndexPath?) {
         

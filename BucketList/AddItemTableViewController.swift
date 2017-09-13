@@ -10,6 +10,8 @@ import UIKit
 
 class AddItemTableViewController: UITableViewController {
     
+    // Creating the delegate
+    
     weak var delegate: AddItemTableViewControllerDelegate?
     
     var item: String?
@@ -17,9 +19,13 @@ class AddItemTableViewController: UITableViewController {
 
     @IBOutlet weak var itemTextField: UITextField!
     
+    // Assigning the action of this button to the delegate
+    
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         delegate?.cancelButtonPressed(by: self)
     }
+    
+    // Assigning the action of this button to the delegate
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
         let text = itemTextField.text!

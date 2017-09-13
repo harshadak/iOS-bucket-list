@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Creating the protocol so that the delegate knows that they need to run these functions
+
 protocol AddItemTableViewControllerDelegate: class {
     func itemSaved(by controller: AddItemTableViewController, with text: String, at indexPath: NSIndexPath?)
     func cancelButtonPressed(by controller: AddItemTableViewController)
